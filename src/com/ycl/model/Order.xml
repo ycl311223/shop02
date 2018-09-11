@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.ycl.model.Order">
+ 	<insert id="add" parameterType="Order">
+ 		insert into t_orders(buy_date,pay_date,confirm_date,user_id,address_id,status,price)
+ 		values(#{buy_date},#{pay_date},#{confirm_date},#{user.id},#{address.id})
+ 	</insert>
+ 	<delete id="delete" parameterType="int">
+ 		delete from t_orders where id=#{id}
+ 	</delete>
+ 	<update id="update" parameterType="Order">
+ 		update t_orders set buy_date=#{buy_date},pay_date=#{pay_date},confirm_date=#{confirm_date},
+ 		user_id=#{user.id},address_id=#{address.id}
+ 	</update>
+ 	<select id="load" parameterType="int" resultMap="orderMap">
+ 		select 
+ 			t1.*,
+ 			t2.id as u_id,
+ 			t3.id as a_id,t3.name as a_name,t3.user_id as au_id,
+ 			t4.id as cp_id,t4.price as cd_price,t4.p_id as cp_p_id,
+ 			t5.id as p_id,t5.price as p_price,t5.status as p_status,
+ 			
+ 		from 
+ 			t_orders as t1 
+	 		left join t_user t2 on t1.user_id=t2.id 
+	 		left join t_address t3 on t1.address_id=t3.id
+	 		left join t_car_product t4 on t1.id=t4.o_id
+	 		left join t_product t5 on t5.id=t4.p_id
+	 		
+ 		where t1.id=#{id}
+ 	</select>
+ 	<resultMap type="Order" id="orderMap">
+ 		<id property="id" column="id"/>
+ 		<result property="buy_date" column="buy_date"/>
+ 		<result property="pay_date" column="pay_date"/>
+ 		<result property="confirm_date" column="confirm_date"/>
+ 		<association property="user" javaType="User">
+ 			<id property="u_id" column="id"/>
+ 			<result property="username" column="username"/>
+ 			<result property="password" column="password"/>
+ 			<result property="nickname" column="nickname"/>
+ 			<result property="type" column="type"/>
+ 		</association>
+ 		<association property="address" javaType="Address">
+ 			<id property="a_id" column="id"/>
+ 			<result property="name" column="name"/>
+ 			<result property="phone" column="name"/>
+ 			<result property="postcode" column="name"/>
+ 			<result property="user_id" column="user_id"/> 			
+ 		</association>
+ 		<collection property="carProducts" ofType="CarProduct">
+ 			<id property="cp_id " column="id"/>
+ 			<result property="number" column="number"/>
+ 			<result property="price" column="price"/>
+ 			<association property="product" javaType="Product">
+ 				<id property="id" column="p_id"/>
+ 				<result property="name" column="name"/>
+ 				<result property="price" column="p_price"/>
+ 				<result property="intro" column="intro"/>
+ 				<result property="status" column="p_status"/>
+ 				<result property="img" column="img"/>
+ 				<result property="stock" column="stock"/>
+ 			</association>
+ 		</collection>
+ 	</resultMap>
+ </mapper>
