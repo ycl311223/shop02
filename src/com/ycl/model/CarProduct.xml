@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.ycl.model.CarProduct">
+ 	<insert id="add" parameterType="CarProduct">
+ 		insert into t_car_product(number,price,o_id,p_id) values(#{number},#{price},#{order.id},#{product.id})
+ 	</insert>
+ 	<delete id="delete" parameterType="int">
+ 		delete from t_car_product where id=#{id}
+ 	</delete>
+ 	
+ </mapper> 

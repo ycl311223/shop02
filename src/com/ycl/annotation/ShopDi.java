@@ -1,5 +1,9 @@
 package com.ycl.annotation;
 
-public @interface ShopDi {
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ShopDi {
+	String value() default "";
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.ycl.model.Product">
+ 	<insert id="add" parameterType="Product">
+ 		insert into t_product(name,price,category_id,intro,status,img,stock) 
+ 		values(#{name},#{price},#{category.id},#{intro},#{status},#{img},#{stock})
+ 	</insert>
+ 	<delete id="delete" parameterType="int">
+ 		delete from t_product where id=#{id}
+ 	</delete>
+ 	<update id="update" parameterType="Product">
+ 		update 
+ 			t_product set name=#{name},price=#{price},category_id=#{category.id},
+ 			intro=#{intro},status=#{status},img=#{img},stock=#{stock} 
+		where 
+			id=#{id}
+ 	</update>
+ 	<select id="load" parameterType="int" resultMap="productMap">
+ 		select 
+ 			t1.*,t2.id as cid,t2.name as cname 
+		from
+			t_product t1 left join t_category t2 on t1.category_id=t2.id
+		where
+			t1.id=#{id} 
+ 	</select>
+ 	<resultMap type="Product" id="productMap">
+ 		<id property="id" column="id"/>
+ 		<result property="name" column="name"/>
+ 		<result property="price" column="price"/>
+ 		<result property="intro" column="intro"/>
+ 		<result property="status" column="status"/>
+ 		<result property="img" column="img"/>
+ 		<result property="stock" column="stock"/>
+ 		<association property="category" javaType="Category">
+ 			<id property="id" column="cid"/>
+ 			<result property="name" column="cname"/>
+ 		</association>
+ 	</resultMap>
+ </mapper> 
