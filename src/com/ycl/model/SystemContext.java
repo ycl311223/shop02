@@ -36,7 +36,7 @@ public class SystemContext {
 		return order.get();
 	}
 	public static void setOrder(String _order) {
-		SystemContext.setOrder(_order);
+		SystemContext.order.set(_order);
 	}
 	public static String getSort() {
 		return sort.get();

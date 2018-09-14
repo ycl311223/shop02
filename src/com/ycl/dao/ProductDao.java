@@ -1,5 +1,10 @@
 package com.ycl.dao;
 
+import java.util.List;
+import java.util.Map;
+
+import com.ycl.model.Pager;
+
 public class ProductDao extends BaseDao {
 	@Override
 	public void add(Object obj) {
@@ -16,5 +21,14 @@ public class ProductDao extends BaseDao {
 	@Override
 	public Object load(Class clz, int id) {
 		return super.load(clz, id);
+	}
+	
+	@Override
+	public Pager find(Class clz, Map<String, Object> params) {
+		return super.find(clz, params);
+	}
+	@Override
+	public List list(Class clz, Map<String, Object> params) {
+		return super.list(clz, params);
 	}
 }

@@ -2,13 +2,19 @@ package com.ycl.test;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.After;
 import org.junit.Test;
 
 import com.ycl.dao.CategoryDao;
 import com.ycl.dao.ProductDao;
 import com.ycl.model.Category;
+import com.ycl.model.Pager;
 import com.ycl.model.Product;
+import com.ycl.model.SystemContext;
 
 public class TestProductDao {
 
@@ -38,11 +44,28 @@ public class TestProductDao {
 		System.out.println(p);
 	}
 	@Test
+	public void testList() {
+		Map<String,Object> params=new HashMap<>();
+		params.put("id", 2);
+		List list = pd.list(Product.class, params);
+		System.out.println(list);
+	}
+	@Test
+	public void testFind() {
+		SystemContext.setOrder("desc");
+		SystemContext.setSort("id");
+		SystemContext.setPageSize(10);
+		SystemContext.setPageOffset(1);
+		Map<String,Object> params=new HashMap<>();
+		Pager find = pd.find(Product.class, params);
+		System.out.println(find);
+	}
+	
+	@Test
 	public void testUpdate() {
 		Product op=(Product) pd.load(Product.class, 2);
 		op.setName("西红柿");
 		pd.update(op);
-		
 	}
 
 }

@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import com.ycl.model.SystemContext;
 import com.ycl.util.RequestUtil;
 
-@WebFilter("/SystemContextFilter")
+
 public class SystemContextFilter implements Filter {
 
     public SystemContextFilter() {

@@ -1,7 +1,13 @@
 package com.ycl.dao;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
+import com.ycl.model.Pager;
+import com.ycl.model.SystemContext;
 import com.ycl.util.DaoUtil;
 import com.ycl.util.MyBatisUtil;
 
@@ -65,4 +71,52 @@ public class BaseDao {
 		}
 		return object;
 	};
+	
+	public List list(Class clz,Map<String,Object>params) {
+		List list=null;
+		SqlSession session=null;
+		try {
+			session=MyBatisUtil.getSession();
+			list=session.selectList(clz.getName()+".list", params);
+			session.commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		}finally {
+			MyBatisUtil.closeSession(session);
+		}
+		return list;
+	}
+	
+	public Pager find(Class clz,Map<String,Object>params) {
+		int pageSize=SystemContext.getPageSize();
+		int pageOffset = SystemContext.getPageOffset();
+		String order = SystemContext.getOrder();
+		String sort = SystemContext.getSort();
+		SqlSession session=null;
+		Pager pager=null;
+		
+		try {
+			session=MyBatisUtil.getSession();
+			if(params==null) params=new HashMap<String,Object>();
+			params.put("pageSize", pageSize);
+			params.put("pageOffset", pageOffset);
+			params.put("order", order);
+			params.put("sort", sort);
+			List<Object> list = session.selectList(clz.getName()+".find", params);
+			pager=new Pager();
+			pager.setDatas(list);
+			pager.setPageOffset(pageOffset);
+			pager.setPageSize(pageSize);
+			int totalRecord=session.selectOne(clz.getName()+".count", params);
+			pager.setTotalRecord(totalRecord);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		}finally {
+			MyBatisUtil.closeSession(session);
+		}
+		return pager;
+	}
 }
