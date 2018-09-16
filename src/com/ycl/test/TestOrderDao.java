@@ -3,6 +3,8 @@ package com.ycl.test;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Test;
@@ -13,6 +15,9 @@ import com.ycl.dao.OrderDao;
 import com.ycl.dao.UserDao;
 import com.ycl.model.Address;
 import com.ycl.model.Order;
+import com.ycl.model.Pager;
+import com.ycl.model.Product;
+import com.ycl.model.SystemContext;
 import com.ycl.model.User;
 
 public class TestOrderDao {
@@ -39,5 +44,15 @@ public class TestOrderDao {
 	public void testLoad() {
 		Order order = (Order) od.load(Order.class, 1);
 		System.out.println(order);
+	}
+	@Test
+	public void testFind() {
+		SystemContext.setOrder("desc");
+//		SystemContext.setSort("pname");
+		SystemContext.setPageSize(10);
+		SystemContext.setPageOffset(1);
+		Map<String,Object> params=new HashMap<>();
+		Pager find = od.find(Order.class, params);
+		System.out.println(find);
 	}
 }

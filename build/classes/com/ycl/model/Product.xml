@@ -25,6 +25,34 @@
 		where
 			t1.id=#{id} 
  	</select>
+ 	<select id="list" parameterType="map" resultMap="productMap">
+ 		select 
+ 			t1.*,t2.id as cid,t2.name as cname 
+		from
+			t_product t1 left join t_category t2 on t1.category_id=t2.id
+		where
+			t2.id=#{id} 
+ 	</select>
+ 	<select id="find" parameterType="map" resultMap="productMap">
+ 		select
+ 			t1.*,t2.id as cid,t2.name as cname
+		from 
+			t_product t1 left join t_category t2 on t1.category_id=t2.id
+		<where>
+		</where>
+		<if test="sort!=null">
+		order by 
+			${sort}
+			<if test="order!=null">
+			${order}
+			</if>
+		</if>
+		limit #{pageOffset},#{pageSize}
+ 	</select>
+ 	<select id="count" parameterType="map" resultType="int">
+ 		select count(*) from t_product
+ 	</select>
+ 	
  	<resultMap type="Product" id="productMap">
  		<id property="id" column="id"/>
  		<result property="name" column="name"/>

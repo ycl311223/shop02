@@ -1,6 +1,10 @@
 package com.ycl.test;
 
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.After;
 import org.junit.Test;
 
@@ -29,10 +33,17 @@ public class TestAddressDao {
 	}
 	@Test
 	public void testload() {
-		Object load = ad.load(Address.class, 2);
+		Object load = ad.load(Address.class, 3);
 		System.out.println(load);
 	}
 	
+	@Test
+	public void testlist() {
+		Map<String,Object> params=new HashMap<>();
+		params.put("id", 4);
+		List list = ad.list(Address.class, params);
+		System.out.println(list);
+	}
 	@Test
 	public void testupdate() {
 		User user=(User) userDao.load(User.class, 4);

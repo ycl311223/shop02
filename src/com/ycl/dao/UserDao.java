@@ -1,5 +1,9 @@
 package com.ycl.dao;
 
+import java.util.Map;
+
+import com.ycl.model.Pager;
+
 public class UserDao extends BaseDao {
 	@Override
 	public void add(Object obj) {
@@ -8,17 +12,18 @@ public class UserDao extends BaseDao {
 	
 	@Override
 	public Object load(Class clz, int id) {
-		// TODO Auto-generated method stub
 		return super.load(clz, id);
 	}
 	@Override
 	public void update(Object obj) {
-		// TODO Auto-generated method stub
 		super.update(obj);
 	}
 	@Override
 	public void delete(Class clz, int id) {
-		// TODO Auto-generated method stub
 		super.delete(clz, id);
+	}
+	@Override
+	public Pager find(Class clz, Map<String, Object> params) {
+		return super.find(clz, params);
 	}
 }

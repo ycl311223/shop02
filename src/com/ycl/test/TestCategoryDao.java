@@ -2,6 +2,10 @@ package com.ycl.test;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.After;
 import org.junit.Test;
 
@@ -24,6 +28,14 @@ public class TestCategoryDao {
 	public void testLoad() {
 		Object load = cd.load(Category.class, 1);
 		System.out.println(load);
+	}
+	
+	@Test
+	public void testList() {
+		Map<String,Object> params=new HashMap<>();
+		List list = cd.list(Category.class, null);
+		System.out.println(list);
+		
 	}
 	
 	@Test
