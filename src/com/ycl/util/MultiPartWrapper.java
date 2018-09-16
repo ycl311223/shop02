@@ -26,7 +26,7 @@ public class MultiPartWrapper extends HttpServletRequestWrapper {
 		setParams(request);
 	}
 	/**
-	 * 将普通表单空间的参数放到参数域中，将文件上传的空间的参数上传到参数域中，将文件上传的文件内容放到请求域中。此处的参数是指表单控件的名称和值的键值对。
+	 * 将普通表单控件的参数放到参数域中，将文件上传的空间的参数上传到参数域中，将文件上传的文件内容放到请求域中。此处的参数是指表单控件的名称和值的键值对。
 	 * */
 	private void setParams(HttpServletRequest request) {
 		ByteArrayOutputStream baos=null;

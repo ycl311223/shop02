@@ -71,6 +71,21 @@ public class BaseDao {
 		}
 		return object;
 	};
+	public Object loadByUserName(Class clz,String name) {
+		SqlSession session=null;
+		Object obj=null;
+		try {
+			session=MyBatisUtil.getSession();
+			obj=session.selectOne(clz.getName()+".loadByName", name);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		}finally {
+			MyBatisUtil.closeSession(session);
+		}
+		return obj;
+	}
 	
 	public List list(Class clz,Map<String,Object>params) {
 		List list=null;

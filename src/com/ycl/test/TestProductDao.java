@@ -23,12 +23,12 @@ public class TestProductDao {
 	@Test
 	public void testAdd() {
 		Product p=new Product();
-		p.setName("西瓜");
+		p.setName("高粱");
 		p.setPrice(15.2);
 		p.setStatus(0);
 		p.setStock(150);
-		p.setIntro("特别好吃");
-		p.setImg("xxx.jpg");
+		p.setIntro("特别难吃");
+		p.setImg("yyy.jpg");
 		CategoryDao cd=new CategoryDao();
 		Category category=(Category) cd.load(Category.class, 2);
 		p.setCategory(category);

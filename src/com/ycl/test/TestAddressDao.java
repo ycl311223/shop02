@@ -23,9 +23,9 @@ public class TestAddressDao {
 	UserDao userDao=new UserDao();
 	@Test
 	public void testAdd() {
-		User user=(User) userDao.load(User.class, 4);
+		User user=(User) userDao.load(User.class, 1);
 		Address a=new Address();
-		a.setName("银川");
+		a.setName("北京");
 		a.setPhone("15248813013");
 		a.setPostcode("751400");
 		a.setUser(user);

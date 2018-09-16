@@ -24,7 +24,7 @@ public class TestCarProductDao {
 		cp.setOrder(order);
 		cp.setPrice(100);
 		ProductDao pd=new ProductDao();
-		Product product = (Product) pd.load(Product.class, 2);
+		Product product = (Product) pd.load(Product.class, 1);
 		cp.setProduct(product);
 		
 		cpd.add(cp);

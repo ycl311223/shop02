@@ -33,10 +33,10 @@ public class TestOrderDao {
 		o.setPrice(1200);
 		o.setStatus(1);
 		UserDao ud=new UserDao();
-		User user=(User) ud.load(User.class, 4);
+		User user=(User) ud.load(User.class, 2);
 		o.setUser(user);
 		AddressDao ad=new AddressDao();
-		Address addr=(Address) ad.load(Address.class, 3);
+		Address addr=(Address) ad.load(Address.class, 1);
 		o.setAddress(addr);
 		od.add(o);
 	}
@@ -48,7 +48,7 @@ public class TestOrderDao {
 	@Test
 	public void testFind() {
 		SystemContext.setOrder("desc");
-//		SystemContext.setSort("pname");
+		SystemContext.setSort("pname");
 		SystemContext.setPageSize(10);
 		SystemContext.setPageOffset(1);
 		Map<String,Object> params=new HashMap<>();

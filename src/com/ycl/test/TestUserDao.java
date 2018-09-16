@@ -17,8 +17,8 @@ public class TestUserDao {
 	@Test
 	public void testAdd() {
 		User u=new User();
-		u.setUsername("ycl");
-		u.setPassword("123");
+		u.setUsername("zzt");
+		u.setPassword("456");
 		u.setNickname("ll");
 		u.setType(0);
 		
@@ -28,7 +28,12 @@ public class TestUserDao {
 	@Test
 	public void testLoad() {
 		User u=new User();
-		Object load = userDao.load(User.class, 2);
+		Object load = userDao.load(User.class, 4);
+		System.out.println(load);
+	}
+	@Test
+	public void testLoadByUserName() {
+		Object load = userDao.loadByUserName(User.class, "ycl");
 		System.out.println(load);
 	}
 	
@@ -49,12 +54,11 @@ public class TestUserDao {
 	@Test
 	public void testFind() {
 		SystemContext.setOrder("desc");
-		SystemContext.setSort("name");
+		SystemContext.setSort("username");
 		SystemContext.setPageSize(10);
-		SystemContext.setPageOffset(1);
+		SystemContext.setPageOffset(0);
 		Map<String,Object> params=new HashMap<>();
 		Pager find = userDao.find(User.class, params);
-		System.out.println(find);
+		System.out.println(find.getDatas());
 	}
-	
 }

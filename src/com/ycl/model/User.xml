@@ -15,13 +15,14 @@
  	<select id="load" parameterType="int" resultMap="userMap">
  		select t1.*,t2.id as a_id from t_user t1 left join t_address t2 on t1.id=t2.user_id where t1.id=#{id}
  	</select>
+ 	<select id="loadByName" parameterType="String" resultMap="userMap">
+ 		select *,t2.id as a_id from t_user t1 left join t_address t2 on t1.id=t2.user_id where t1.username=#{username}
+ 	</select>
  	<select id="find" parameterType="map" resultMap="userMap">
- 		select 
- 			*,t2.id as a_id 
+ 		select *,t2.id as a_id 
 		from 
 			t_user t1 left join t_address t2 on t1.id=t2.user_id 
-		<where>
-		</where>
+		
 		<if test="sort!=null">
 			order by ${sort}
 			<if test="order!=null">

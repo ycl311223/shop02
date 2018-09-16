@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.ycl.model.Product">
  	<insert id="add" parameterType="Product">
- 		insert into t_product(name,price,category_id,intro,status,img,stock) 
+ 		insert into t_product(name,price,c_id,intro,status,img,stock) 
  		values(#{name},#{price},#{category.id},#{intro},#{status},#{img},#{stock})
  	</insert>
  	<delete id="delete" parameterType="int">

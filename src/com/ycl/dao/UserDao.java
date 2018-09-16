@@ -15,6 +15,10 @@ public class UserDao extends BaseDao {
 		return super.load(clz, id);
 	}
 	@Override
+	public Object loadByUserName(Class clz, String name) {
+		return super.loadByUserName(clz, name);
+	}
+	@Override
 	public void update(Object obj) {
 		super.update(obj);
 	}

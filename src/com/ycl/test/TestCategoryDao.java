@@ -21,7 +21,7 @@ public class TestCategoryDao {
 	@Test
 	public void testAdd() {
 		Category c=new Category();
-		c.setName("汽车");
+		c.setName("家电");
 		cd.add(c);
 	}
 	@Test
